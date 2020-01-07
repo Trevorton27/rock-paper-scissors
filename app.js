@@ -3,10 +3,11 @@ let computerScore = 0;
 const userScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score");
 const scoreBoard_div = document.querySelector(".score-board");
-const result_div = document.querySelector(".result");
+const result_p = document.querySelector(".result > p");
 const rock_div = document.getElementById("r");
 const paper_div = document.getElementById("p");
 const scissors_div = document.getElementById("s");
+const finalScore_div = document.getElementById("finalScore_div");
 
 function getComputerChoice() {
     const choices = ['r', 'p', 's'];
@@ -14,20 +15,38 @@ function getComputerChoice() {
     return choices[randomNumber];
 };
 
-function win() {
+function changeToWord(letter) {
+    if(letter === 'r') {
+        return 'rock'
+    }
+    if(letter === 'p') {
+        return 'paper'
+    }
+    return 'scissors';
+};
+
+
+function win(userChoice, computerChoice) {
     userScore++;
     userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
     console.log("you won dawg! Your score is " + userScore);
+    result_p.innerHTML = "You chose " + changeToWord(userChoice) + " the computer chose " + changeToWord(computerChoice) + ". You win.";
 };
 
-function lose() {
+function lose(userChoice, computerChoice) {
     computerScore++;
+    userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
     console.log("you lost dawg!");
+    result_p.innerHTML = "You chose " + changeToWord(userChoice) + " the computer chose " + changeToWord(computerChoice) + ". You lost.";
 };
 
-function tie() {
+function tie(userChoice) {
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
     console.log("its a tie dawg!");
+    result_p.innerHTML = "Both you and the computer chose " + changeToWord(userChoice) + ". It's a tie.";
 };
 
 function game(userChoice) {
@@ -36,17 +55,17 @@ function game(userChoice) {
         case 'rs':
         case 'pr':
         case 'sp':
-            win();
+            win(userChoice, computerChoice);
             break;
         case 'rp':
         case 'ps':
         case 'sr':
-            lose();
+            lose(userChoice, computerChoice);
             break;
         case 'rr':
         case 'ss':
         case 'pp':
-            tie();
+            tie(userChoice, computerChoice);
             break;
     }
     console.log("The computers choice is " + computerChoice);
@@ -59,6 +78,20 @@ function main() {
     paper_div.addEventListener("click", () => game("p"));
 
     scissors_div.addEventListener("click", () => game("s"));
+};
+
+function displayFinalScore() {
+    const userWins = `Final score is ${userScore} to ${computerScore}. You win!`;
+    const computerWins = `Final score is ${userScore} to ${computerScore}. Hate to say it but you lost.`;
+    const tie = `Final score is ${userScore} to ${computerScore}. It's a tie.`;
+    if(userScore > computerScore) {
+       finalScore_div.innerHTML = userWins;
+    } else if (userScore === computerScore) {
+        finalScore_div.innerHTML = tie;
+    } else  {
+        finalScore_div.innerHTML = computerWins;
+    }
+    
 };
 
 main();

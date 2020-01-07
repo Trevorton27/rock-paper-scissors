@@ -6,15 +6,16 @@
     </head>
     <body>
         <header>
-            <h1>Rock Paper Scissors, dawg!</h1>
+            <h1>Rock Paper Scissors</h1>
+            <h3>"The classic game where 6 year olds can make decisions without fighting."</h3>
         </header>
         <div class="score-board">
-            <div id="user-label" class="badge">User</div>
-            <div id="computer-label" class="badge">Comp</div>
+            <div id="user-label" class="badge">Player</div>
+            <div id="computer-label" class="badge">Computer</div>
             <span id="user-score">0</span>:<span id="computer-score">0</span>
         </div>
         <div class="result">
-            <p>Paper Covers Rock. You Win, Dawg!</p>
+            <p>Results will display here.</p>
         </div>
         <div class="choices">
             <div id="r" class="choice">
@@ -39,7 +40,15 @@
                 />
               </div>
         </div>
-        <p id="action-message">Make your move, dawg.</p>
+        <div class="final-results">
+          <p id="action-message">Click one of the three buttons to make your move.</p>
+          <hr style="width: 60%; margin: 0 auto;">
+          <p id="finished-tag">Finished? Click the button to see final results.</p>
+          <button id="finished-button" onclick="displayFinalScore();">Click Me.</button>
+          <div id="finalScore_div">
+
+          </div>
+        </div>
         <script src="app.js" charset="utf-8"></script>
     </body>
 </html>
