@@ -25,12 +25,10 @@ function changeToWord(letter) {
     return 'scissors';
 };
 
-
 function win(userChoice, computerChoice) {
     userScore++;
     userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
-    console.log("you won dawg! Your score is " + userScore);
     result_p.innerHTML = "You chose " + changeToWord(userChoice) + " the computer chose " + changeToWord(computerChoice) + ". You win.";
 };
 
@@ -38,14 +36,12 @@ function lose(userChoice, computerChoice) {
     computerScore++;
     userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
-    console.log("you lost dawg!");
     result_p.innerHTML = "You chose " + changeToWord(userChoice) + " the computer chose " + changeToWord(computerChoice) + ". You lost.";
 };
 
 function tie(userChoice) {
     userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
-    console.log("its a tie dawg!");
     result_p.innerHTML = "Both you and the computer chose " + changeToWord(userChoice) + ". It's a tie.";
 };
 
@@ -68,8 +64,6 @@ function game(userChoice) {
             tie(userChoice, computerChoice);
             break;
     }
-    console.log("The computers choice is " + computerChoice);
-    console.log("Your choice is " + userChoice);
 }
 
 function main() {
@@ -81,9 +75,13 @@ function main() {
 };
 
 function displayFinalScore() {
-    const userWins = `Final score is ${userScore} to ${computerScore}. You win!`;
-    const computerWins = `Final score is ${userScore} to ${computerScore}. Hate to say it but you lost.`;
-    const tie = `Final score is ${userScore} to ${computerScore}. It's a tie.`;
+
+    const userWins = `<p class="finalScoreDisplay" >Final score is ${userScore} to ${computerScore}. You win the game!<p>
+    <button class="finished-button" onclick="window.location.reload();">Play Again</button>`;
+    const computerWins = `<p>Final score is ${userScore} to ${computerScore}. Hate to say it but you lost the game.</p>
+    <button class="finished-button" onclick="window.location.reload();">Play Again</button>`;
+    const tie = `<p>Final score is ${userScore} to ${computerScore}. It's a tie.</p>
+    <button class="finished-button" onclick="window.location.reload();">Play Again</button>`;
     if(userScore > computerScore) {
        finalScore_div.innerHTML = userWins;
     } else if (userScore === computerScore) {
@@ -91,7 +89,6 @@ function displayFinalScore() {
     } else  {
         finalScore_div.innerHTML = computerWins;
     }
-    
 };
 
 main();
