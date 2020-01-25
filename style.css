@@ -52,7 +52,7 @@ header > h3 {
     border-radius: 4px;
 }
 #current-score {
-    color: white;
+    color: #2d422d;
     text-align: center;
     font-family: Asap, sans-serif;
     font-size: 50px;
@@ -73,11 +73,13 @@ header > h3 {
 #user-score {
     font-size: 60px;
     padding: 0 20px;
+    color: #2d422d;
 }
 
 #computer-score {
     font-size: 60px;
     padding: 0 20px;
+    color: #2d422d;
 }
 .result {
     font-size: 40px;
@@ -88,6 +90,7 @@ header > h3 {
     text-align: center;
     font-weight: bold;
     font-family: Asap, sans-serif;
+    color: #2d422d; 
 }
 
 .choices {
@@ -111,7 +114,7 @@ header > h3 {
 
 #action-message {
     text-align: center;
-    color: white;
+    color: #2d422d;
     font-weight: bold;
     font-size: 35px;
     font-family: Asap, sans-serif;
@@ -131,7 +134,7 @@ header > h3 {
     font-size: 20px;
     font-weight: bold;
     padding-top: 20px;
-    color: white;
+    color: #2d422d;
 }
 
 .finished-button {

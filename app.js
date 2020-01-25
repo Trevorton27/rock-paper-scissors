@@ -82,10 +82,14 @@ function displayFinalScore() {
     <button class="finished-button" onclick="window.location.reload();">Play Again</button>`;
     const tie = `<p>Final score is ${userScore} to ${computerScore}. It's a tie.</p>
     <button class="finished-button" onclick="window.location.reload();">Play Again</button>`;
+    const bro = `<p>Bro? You haven't even played yet? I mean it's kinda like... Just sayin.</p>
+    <button class="finished-button" onclick="window.location.reload();">At least try?</button>`;
     if(userScore > computerScore) {
        finalScore_div.innerHTML = userWins;
-    } else if (userScore === computerScore) {
+    } else if (userScore !=0 && userScore === computerScore) {
         finalScore_div.innerHTML = tie;
+    } else if (userScore == 0 && computerScore == 0) {
+        finalScore_div.innerHTML = bro;
     } else  {
         finalScore_div.innerHTML = computerWins;
     }
