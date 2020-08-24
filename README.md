@@ -7,7 +7,7 @@
  ![](rock-scissors-paper%20screenshot.png)
  
 ## Instructions
-1. Click on one of the three buttons. The computer will generate a random response to your choice.
+1. Click on one of the three circular buttons with a rock, paper, or scissors hand icon. The computer will generate a random response to your choice.
 2. Continue clicking to your heart's content to see if you can beat the computer.
 3. When you're finished, click the button labelled "Click Me" to see the final score.
 4. If so inclined, click the button labelled "Play again?" to start a new game.
