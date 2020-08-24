@@ -1,13 +1,14 @@
 let userScore = 0;
 let computerScore = 0;
-const userScore_span = document.getElementById("user-score");
-const computerScore_span = document.getElementById("computer-score");
-const scoreBoard_div = document.querySelector(".score-board");
-const result_p = document.querySelector(".result > p");
+
 const rock_div = document.getElementById("r");
+rock_div.addEventListener("click", () => startGame("r"));
+
 const paper_div = document.getElementById("p");
+paper_div.addEventListener("click", () => startGame("p"));
+
 const scissors_div = document.getElementById("s");
-const finalScore_div = document.getElementById("finalScore_div");
+scissors_div.addEventListener("click", () => startGame("s"));
 
 function getComputerChoice() {
     const choices = ['r', 'p', 's'];
@@ -16,83 +17,70 @@ function getComputerChoice() {
 };
 
 function changeToWord(letter) {
-    if(letter === 'r') {
+    if (letter === 'r') {
         return 'rock'
     }
-    if(letter === 'p') {
+    if (letter === 'p') {
         return 'paper'
     }
     return 'scissors';
 };
 
-function win(userChoice, computerChoice) {
-    userScore++;
-    userScore_span.innerHTML = userScore;
-    computerScore_span.innerHTML = computerScore;
-    result_p.innerHTML = "You chose " + changeToWord(userChoice) + " the computer chose " + changeToWord(computerChoice) + ". You win.";
-};
+function startGame(userChoice) {
 
-function lose(userChoice, computerChoice) {
-    computerScore++;
-    userScore_span.innerHTML = userScore;
-    computerScore_span.innerHTML = computerScore;
-    result_p.innerHTML = "You chose " + changeToWord(userChoice) + " the computer chose " + changeToWord(computerChoice) + ". You lost.";
-};
-
-function tie(userChoice) {
-    userScore_span.innerHTML = userScore;
-    computerScore_span.innerHTML = computerScore;
-    result_p.innerHTML = "Both you and the computer chose " + changeToWord(userChoice) + ". It's a tie.";
-};
-
-function game(userChoice) {
+    const result_p = document.querySelector(".result > p");
     const computerChoice = getComputerChoice();
     switch (userChoice + computerChoice) {
         case 'rs':
         case 'pr':
         case 'sp':
-            win(userChoice, computerChoice);
+            userScore++;
+            result_p.innerHTML = "You chose " + changeToWord(userChoice) + " the computer chose " + changeToWord(computerChoice) + ". You win.";
             break;
         case 'rp':
         case 'ps':
         case 'sr':
-            lose(userChoice, computerChoice);
+            computerScore++;
+            result_p.innerHTML = "You chose " + changeToWord(userChoice) + " the computer chose " + changeToWord(computerChoice) + ". You lost.";
             break;
         case 'rr':
         case 'ss':
         case 'pp':
-            tie(userChoice, computerChoice);
+            result_p.innerHTML = "Both you and the computer chose " + changeToWord(userChoice) + ". It's a tie.";
             break;
     }
+
+    const userScore_span = document.getElementById("user-score");
+    userScore_span.innerHTML = userScore;
+
+    const computerScore_span = document.getElementById("computer-score");
+    computerScore_span.innerHTML = computerScore;
 }
 
-function main() {
-    rock_div.addEventListener("click", () => game("r"));
-
-    paper_div.addEventListener("click", () => game("p"));
-
-    scissors_div.addEventListener("click", () => game("s"));
-};
-
 function displayFinalScore() {
+    const paragraphEl = document.createElement('P');
+    paragraphEl.className = 'finalScoreDisplay';
+    paragraphEl.textContent = `Final score is ${userScore} to ${computerScore}. You win the game!`;
 
-    const userWins = `<p class="finalScoreDisplay" >Final score is ${userScore} to ${computerScore}. You win the game!<p>
-    <button class="finished-button" onclick="window.location.reload();">Play Again</button>`;
-    const computerWins = `<p>Final score is ${userScore} to ${computerScore}. Hate to say it but you lost the game.</p>
-    <button class="finished-button" onclick="window.location.reload();">Play Again</button>`;
-    const tie = `<p>Final score is ${userScore} to ${computerScore}. It's a tie.</p>
-    <button class="finished-button" onclick="window.location.reload();">Play Again</button>`;
-    const bro = `<p>Bro? You haven't even played yet? I mean it's kinda like... Just sayin.</p>
-    <button class="finished-button" onclick="window.location.reload();">At least try?</button>`;
-    if(userScore > computerScore) {
-       finalScore_div.innerHTML = userWins;
-    } else if (userScore !=0 && userScore === computerScore) {
-        finalScore_div.innerHTML = tie;
+    const buttonEl = document.createElement('BUTTON');
+    buttonEl.className = 'finished-button';
+    buttonEl.addEventListener('click', () => {
+        window.location.reload();
+    });
+    buttonEl.textContent = 'Play again?'
+
+    if (userScore > computerScore) {
+        paragraphEl.textContent = `Final score is ${userScore} to ${computerScore}. You win the game!`;
+    } else if (userScore != 0 && userScore === computerScore) {
+        paragraphEl.textContent = `Final score is ${userScore} to ${computerScore}. It's a tie.`;
     } else if (userScore == 0 && computerScore == 0) {
-        finalScore_div.innerHTML = bro;
-    } else  {
-        finalScore_div.innerHTML = computerWins;
+        paragraphEl.textContent = `Dude... You haven't even played yet. I mean it's kinda like...`;
+        buttonEl.textContent = `At least try?`;
+    } else {
+        paragraphEl.textContent = `Final score is ${userScore} to ${computerScore}. Hate to say it but you lost the game.`;
     }
-};
 
-main();
+    const finalScore_div = document.getElementById("finalScore_div");
+    finalScore_div.appendChild(paragraphEl);
+    finalScore_div.appendChild(buttonEl);
+};
